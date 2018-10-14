@@ -1,31 +1,46 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
 import json
 import sys
-sys.path.append("/Users/eduardo/Crowdy/server/models")
+sys.path.append("..")
 from theater import theater
-
 
 app = Flask(__name__, template_folder='../../client/templates')
 
+#Homepage - takes in location and radius input from user
 @app.route('/')
 def index():
 	return render_template('index.html')
 
-@app.route('/place')
-def getInfo():
+#Retrieves all theaters by location and radius
+@app.route('/theaters', methods = ['POST', 'GET'])
+def get_all_theaters():
+	#Retrieves location and radius from the form data
+	if request.method == 'POST':
+      		locationString = request.form['Location']
+		radiusString = request.form['Radius']
+
+	#Converts location string to longitude and latitude radiusString
+	geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
+	paramsGeocode = dict(
+		address=locationString,
+		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
+	)
+	resp = requests.get(url=geocodeUrl, params=paramsGeocode).content
+	respParse = json.loads(resp)
+	lng = str(respParse["results"][0]["geometry"]["location"]["lng"])
+	lat = str(respParse["results"][0]["geometry"]["location"]["lat"])
+
+	#Finds movie theaters based on longitude and latitude and radius
 	url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
 	params = dict(
-		location='29.651634,-82.324829',
-		radius='20000',
+		location=lat + ',' + lng,
+		radius=radiusString,
 		type='movie_theater',
 		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
 	)
-	# data = requests.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=29.651634,-82.324829&radius=20000&type=movie_theater&key=AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI').content
 	data = requests.get(url=url, params=params).content
-	#data = resp.json()
 	parseData = json.loads(data)
-
 	list = []
 
 	for item in parseData["results"]:
@@ -35,16 +50,7 @@ def getInfo():
 		tempT.rating = item["rating"]
 		list.append(tempT)
 
-	for x in list:
-		print x.name
-		print x.address
-		print x.rating
-		print '\n'
-
-	return data
+	return render_template('display_theaters.html', list=list)
 
 if __name__ == '__main__':
-	app.run(debug = True) 
-
-
-
+	app.run(debug = True)
