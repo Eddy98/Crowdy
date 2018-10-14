@@ -47,7 +47,7 @@ def get_all_theaters():
 		tempT = theater()
 		tempT.name = item["name"]
 		tempT.address = item["vicinity"]
-		tempT.rating = item["rating"]
+		#tempT.rating = item["rating"]
 		list.append(tempT)
 
 	return render_template('display_theaters.html', list=list)
