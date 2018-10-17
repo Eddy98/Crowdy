@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import requests
 import json
 import sys
+import os
+#from pml import app
 # sys.path.append("..")
 from theater import theater
 
@@ -52,5 +54,7 @@ def get_all_theaters():
 
 	return render_template('display_theaters.html', list=list)
 
+port = int(os.environ.get('PORT', 8080))
+
 if __name__ == '__main__':
-	app.run(debug = True, port=33507)
+	app.run(debug = True, port =port )
