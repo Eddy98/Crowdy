@@ -53,4 +53,4 @@ def get_all_theaters():
 	return render_template('display_theaters.html', list=list)
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(debug = True, port=33507)
