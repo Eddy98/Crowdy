@@ -2,15 +2,15 @@ from flask import Flask, render_template, request
 import requests
 import json
 import sys
-sys.path.append("..")
+# sys.path.append("..")
 from theater import theater
 
-app = Flask(__name__, template_folder='../../client/templates')
+app = Flask(__name__)
 
 #Homepage - takes in location and radius input from user
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('/index.html')
 
 #Retrieves all theaters by location and radius
 @app.route('/theaters', methods = ['POST', 'GET'])
