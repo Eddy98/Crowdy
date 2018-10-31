@@ -1,11 +1,14 @@
-<h1>Login</h1>
-<form action="/login" method="post">
-  <p>Email</p>
-  {{ form.email }}
-  <p>Password</p>
-  {{ form.password }}
-  {{ form.hidden_tag() }}
-  <br>
-  <br>
-  <input type="submit" value="Login">
-</form>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+<div class="background">
+  <img class = "crowdy" src="https://i.imgur.com/pC9w43B.png" alt="">
+  <form action="/login" method="post">
+    <p>Email</p>
+    {{ form.email }}
+    <p>Password</p>
+    {{ form.password }}
+    {{ form.hidden_tag() }}
+    <br>
+    <br>
+    <input type="submit" value="Login">
+  </form>
+</div>
