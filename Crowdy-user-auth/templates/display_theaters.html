@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Theater Listings</h1>
+    {% for element in list %}
+     <p><b>Theater: </b>{{ element.name }} </p>
+     <p><b>Address: </b>{{ element.address }} </p>
+     <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
+     {% endfor %}
+     <a href='logout'>Logout</a>
+  </body>
+</html>
