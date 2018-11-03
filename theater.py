@@ -4,4 +4,3 @@ class theater():
 	rating = ""
 	place_id=""
 	popular_times = None
-
