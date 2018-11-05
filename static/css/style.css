@@ -20,6 +20,7 @@
 .crowdy{
   margin-top:100px;
   height: 20%;
+  margin-bottom: 30px;
 }
 
 body {
@@ -121,3 +122,59 @@ p{
   text-align: left;
   margin-left: 23px;
 }
+
+/* Display Theatres Page */
+
+.backgroundTheatrePage{
+  background-image: url("https://imgur.com/axlEjpd.png");
+    width: 100%;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    align-content: center;
+    margin:auto;
+    padding:0;
+    background-size: cover;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.theatreBox{
+  margin-top: 10px;
+  width: 600px;
+  height: 300px;
+  /* border-style: solid;
+  border-width: 5px; */
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.theatreBox p {
+  margin-left: 300px;
+}
+
+.graphBox{
+  float: left;
+  width: 300px;
+  height: 300px;
+  /* border-style: solid;
+  border-width: 5px; */
+  margin-right: 10px;
+  background: grey;
+
+}
+
+/* .container{
+  height: 2800px;
+  border-style: solid;
+  border-width: 1px;
+  width: 1220px;
+  margin: auto;
+  right: 0;
+  left: 0;
+} */
