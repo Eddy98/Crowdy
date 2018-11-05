@@ -9,6 +9,7 @@
     <script src="chart.js"></script>
 
   </head>
+<<<<<<< HEAD
   <div class="backgroundTheatrePage">
     <div class="crowdyWrapper">
       <img class = "crowdy" width="25%" src="https://i.imgur.com/qfHbxkp.png" alt="">
@@ -31,4 +32,16 @@
        <!-- <a href='logout'>Logout</a> -->
     </body>
   </div>
+=======
+  <body>
+    <h1>Theater Listings</h1>
+    {% for element in list %}
+     <p><b>Theater: </b>{{ element.name }} </p>
+     <p><b>Address: </b>{{ element.address }} </p>
+     <p><b>Popular times: </b>{{ element.popular_times }} </p>
+     <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
+     {% endfor %}
+     <a href='logout'>Logout</a>
+  </body>
+>>>>>>> master
 </html>

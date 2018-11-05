@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import sys
+import populartimes
 from theater import theater
 from flask_mongoengine import MongoEngine, Document
 from flask_wtf import FlaskForm
@@ -115,6 +116,8 @@ def dashboard():
 		tempT = theater()
 		tempT.name = item["name"]
 		tempT.address = item["vicinity"]
+		tempT.place_id = item["place_id"]
+		tempT.popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", tempT.place_id)
 		#tempT.rating = item["rating"]
 		list.append(tempT)
 
