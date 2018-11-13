@@ -114,7 +114,12 @@ input {
   opacity: 0.8;
 }
 
-input:hover,input:focus {
+#disappear {
+  opacity: 0;
+}
+
+input:hover,
+input:focus {
   opacity: .9;
   color: black;
   border: 1px solid #08c;
