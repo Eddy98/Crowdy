@@ -2,16 +2,37 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Theatres in Your Area</title>
+    <link rel= "stylesheet" type= "text/css" href= "../static/css/chart.css">
+    <link rel= "stylesheet" type= "text/css" href= "../static/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../static/js/chart.js"></script>
   </head>
-  <body>
-    <h1>Theater Listings</h1>
-    {% for element in list %}
-     <p><b>Theater: </b>{{ element.name }} </p>
-     <p><b>Address: </b>{{ element.address }} </p>
-     <p><b>Popular times: </b>{{ element.popular_times }} </p>
-     <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
-     {% endfor %}
-     <a href='logout'>Logout</a>
-  </body>
+  <div class="backgroundTheatrePage">
+    <div class="crowdyWrapper">
+      <img class = "crowdy" width="25%" src="https://i.imgur.com/qfHbxkp.png" alt="">
+    </div>
+    <body>
+      {% for element in list %}
+      <div class="container">
+        <div class="theatreBox">
+          <div class="graphBox">
+          </div>
+          <p><b>Theater: </b>{{ element.name }} </p>
+          <p><b>Address: </b>{{ element.address }} </p>
+          <form action="{{ url_for('pop') }}" method="POST">
+            <input id="disappear" type="text" name="place" value="{{ element.place_id}}"></input>
+            <button type="submit" value="Send Email" />
+      </form>
+        </div>
+        <div id="chartID">
+        </div>
+
+       <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
+       {% endfor %}
+     </div>
+       <a href='logout'>Logout</a>
+    </body>
+  </div>
 </html>
