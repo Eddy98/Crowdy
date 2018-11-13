@@ -12,7 +12,6 @@
     margin:auto;
     padding:0;
     background-size: cover;
-    /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-size: cover;
 }
@@ -114,17 +113,11 @@ input[type="submit"]:hover {
   -webkit-transition: all 0.40s ease-out;
   transition: all 0.40s ease-out;
 }
-
-/* Register Page */
-
 p{
   font-family: Poppins;
   text-align: left;
   margin-left: 23px;
 }
-
-/* Display Theatres Page */
-
 .backgroundTheatrePage{
   background-image: url("https://imgur.com/axlEjpd.png");
     width: 100%;
@@ -136,7 +129,6 @@ p{
     margin:auto;
     padding:0;
     background-size: cover;
-    /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-size: cover;
 }
@@ -145,8 +137,6 @@ p{
   margin-top: 10px;
   width: 600px;
   height: 300px;
-  /* border-style: solid;
-  border-width: 5px; */
   margin: auto;
   top: 0;
   right: 0;
@@ -162,19 +152,7 @@ p{
   float: left;
   width: 300px;
   height: 300px;
-  /* border-style: solid;
-  border-width: 5px; */
   margin-right: 10px;
   background: grey;
 
 }
-
-/* .container{
-  height: 2800px;
-  border-style: solid;
-  border-width: 1px;
-  width: 1220px;
-  margin: auto;
-  right: 0;
-  left: 0;
-} */
