@@ -187,7 +187,7 @@ input[type="submit"]:hover {
 /* Display Theatres Page */
 
 .backgroundTheatrePage{
-  background-image: url("https://imgur.com/axlEjpd.png");
+    background-color: #31393a;
     width: 100%;
     overflow: hidden;
     background-position: center center;
@@ -202,21 +202,32 @@ input[type="submit"]:hover {
     background-size: cover;
 }
 
+
 .theatreBox{
-  margin-top: 10px;
+  margin-top: 40px;
   width: 600px;
-  height: 300px;
+  height: 150px;
   /* border-style: solid;
   border-width: 5px; */
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  margin-right: 30#;
+  margin: 0 auto;
 }
 
 .theatreBox p {
-  margin-left: 300px;
+  width: 600px;
+  font-family: gotham;
+  color: white;
+  /* border-style: solid;
+  border-width: 1px; */
+  font-size: 32px;
+  margin-right: 30%;
+
+}
+
+#address{
+  margin-top: -20px;
+  font-size: 20px;
+  color: #eed697;
 }
 
 .graphBox{
@@ -230,12 +241,41 @@ input[type="submit"]:hover {
 
 }
 
-/* .container{
-  height: 2800px;
-  border-style: solid;
-  border-width: 1px;
-  width: 1220px;
-  margin: auto;
-  right: 0;
-  left: 0;
-} */
+#leftCornD{
+  bottom: 0px;
+  left: 0px;
+  position: fixed;
+}
+
+#rightCornD{
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+}
+
+.shit{
+  width: 40px;
+  height: 40px;
+
+  /* border-style: solid;
+  border-width: 5px; */
+
+}
+
+.theatreBox button{
+  margin-top: -91px;
+  margin-right: 900px;
+  margin-left: -10px;
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+
+.container{
+  margin-top: 70px;
+  height: 1300px;
+  /* border-style: solid;
+  border-width: 1px; */
+  width: 910px;
+  margin: 0 auto;
+}
