@@ -1,16 +1,21 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 <div class="background">
-  <img class = "crowdy" src="https://i.imgur.com/qfHbxkp.png" alt="">
-    <form action="/register" method="post">
-      <p id = "email">Email</p>
-      {{ form.email }}
-      <p>Password</p>
-      {{ form.password }}
-      {{ form.hidden_tag() }}
-      <p>Location</p>
-      {{ form.location }}
+  <p id="title">Register</p>
+        <form id="registerForm" action="/register" method="post">
+      <!-- <p id = "email">Email</p -->
+      <div id="inputBox">
+        {{ form.email(placeholder = 'Email')}}
+        <!-- <p>Password</p> -->
+        {{ form.password(placeholder = 'Password') }}
+        {{ form.hidden_tag() }}
+
+        <!-- <p>Location</p> -->
+        {{ form.location(placeholder = 'Zip Code')}}
+      </div>
       <br>
       <br>
       <input type="submit" value="Submit">
     </form>
+    <img id="leftCorn" src="https://imgur.com/nmzMpNZ.png" alt="">
+    <img id="rightCorn" src="https://imgur.com/ls2WbKd.png" alt="">
 </div>

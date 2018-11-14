@@ -1,7 +1,7 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
 <div class="background">
-  <img class = "crowdy" src="https://i.imgur.com/pC9w43B.png" alt="">
   <form action="/login" method="post">
+    <p id="title">Crowdy</p>
     <p>Email</p>
     {{ form.email }}
     <p>Password</p>
@@ -11,4 +11,6 @@
     <br>
     <input type="submit" value="Login">
   </form>
+  <img id="leftCorn" src="https://imgur.com/nmzMpNZ.png" alt="">
+  <img id="rightCorn" src="https://imgur.com/ls2WbKd.png" alt="">
 </div>

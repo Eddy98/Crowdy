@@ -1,7 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+@font-face {
+  src: url(fonts/gotham.ttf);
+  font-family: gotham;
+}
+
+@font-face {
+  src: url(fonts/Aller.ttf);
+  font-family: aller;
+}
+
+#title{
+  margin-top: 7%;
+  font-size: 154px;
+  font-family: gotham;
+  text-align: center;
+  color: white;
+}
+
+#subTitle{
+  margin-top: -125px;
+  font-size: 45px;
+  font-family: gotham;
+  text-align: center;
+  color: #eed697;
+  letter-spacing: 20px;
+}
 
 .background{
-  background-image: url("https://imgur.com/axlEjpd.png");
+  background-color: #31393a;
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -15,17 +41,18 @@
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-size: cover;
+
 }
 
 .crowdy{
   margin-top:100px;
   height: 20%;
+  margin-bottom: 30px;
 }
 
 body {
   background: #bdbdc7;
   margin: 0 0;
-  padding:10px;
   text-align:center;
 }
 
@@ -56,21 +83,34 @@ form {
   width: 280px;
 }
 
-input {
-  display: block;
-  background: #142020;
-  font-size: 14px;
-  width:240px;
-  margin: 10px auto;
-  padding: 10px 8px 10px 8px;
-  border-radius: 5px;
-  box-shadow: inset 0 1px 2px rgba(0,0,0, .55), 0px 1px 1px rgba(255,255,255,.5);
-  border: 1px solid #666;
-  font-family: 'Poppins', sans-serif;
-  color: #ffffff;
+#login{
+  margin-top: -30px;
+}
+
+#titleLogin{
+  text-align: center;
+  font-size: 154px;
+  color: white;
+  font-family: gotham;
+}
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #faf1d6 inset !important;
+    opacity: 0.8;
 }
 
 input {
+  margin-top: 20px;
+  display: block;
+  background: #142020;
+  font-size: 14px;
+  width:260px;
+  margin: 10px auto;
+  padding: 10px 8px 10px 8px;
+  border: 1px solid #666;
+  color: white;
+  font-family: Aller;
   opacity: 0.8;
 }
 
@@ -81,47 +121,161 @@ input {
 input:hover,
 input:focus {
   opacity: .9;
-  color:#ffffff;
+  color: black;
   border: 1px solid #08c;
-   box-shadow: 0px 1px 0px rgba(255,255,255,.25),inset 0px 3px 6px rgba(0,0,0,.25);
+  color: white;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="text"]:focus, input[type="password"]:focus {
   box-shadow: inset 0 1px 2px rgba(255,255,255, .35), 0px 1px 15px rgba(0,246,255,.5);
   border: 1px solid #08c;
   outline: none;
 }
 
 input[type="submit"] {
-  margin-top: 20px;
+  /* margin-top: 20px;
   appearance: none;
   opacity: .99;
   width:260px;
-  background: #e97243;
-  box-shadow: inset 0 1px 2px rgba(255,5,255, .35), 0px 1px 6px rgba(0,246,255,.5);
-  border: 1.5px solid #ffffff;
+  background: #b9aa7d;
+  border: 1.5px solid #ffff;
   border-radius: 10px;
-  color: #eee;
   cursor: pointer;
   text-shadow:0px -1px 0px rgba(0,0,0,.5);
+  margin-top: -30px */
 }
 
+
 input[type="submit"]:hover {
-  background: #ff0d76;
+  background: ##b9aa7d;
   width:260px;
   border: 1.5px solid #0a5378;
-  border-radius: 10px;
-  box-shadow: inset 0px 3px 16px rgba(0,0,0,.25),0px 1px 10px rgba(255,255,255,.5),inset 0px -1px 2px rgba(255,255,255,.35);
   text-shadow:0px 1px 1px rgba(0,0,0,.65);
   -webkit-transition: all 0.40s ease-out;
   transition: all 0.40s ease-out;
 }
 
+#leftCorn{
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
+
+}
+
+#rightCorn{
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+}
+
 /* Register Page */
 
-p{
-  font-family: Poppins;
-  text-align: left;
-  margin-left: 23px;
+#registerForm{
+  position:absolute;
+  top:30%;
+  right:0;
+  left:0;
+  color: white;
+}
+
+#inputBox{
+  margin-top: 65px;
+}
+
+
+
+/* Display Theatres Page */
+
+.backgroundTheatrePage{
+    background-color: #31393a;
+    width: 100%;
+    overflow: hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    text-align:center;
+    align-content: center;
+    margin:auto;
+    padding:0;
+    background-size: cover;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+.theatreBox{
+  margin-top: 40px;
+  width: 600px;
+  height: 150px;
+  /* border-style: solid;
+  border-width: 5px; */
+  margin-right: 30#;
+  margin: 0 auto;
+}
+
+.theatreBox p {
+  width: 600px;
+  font-family: gotham;
+  color: white;
+  /* border-style: solid;
+  border-width: 1px; */
+  font-size: 32px;
+  margin-right: 30%;
+
+}
+
+#address{
+  margin-top: -20px;
+  font-size: 20px;
+  color: #eed697;
+}
+
+.graphBox{
+  float: left;
+  width: 300px;
+  height: 300px;
+  /* border-style: solid;
+  border-width: 5px; */
+  margin-right: 10px;
+  background: grey;
+
+}
+
+#leftCornD{
+  bottom: 0px;
+  left: 0px;
+  position: fixed;
+}
+
+#rightCornD{
+  bottom: 0px;
+  right: 0px;
+  position: fixed;
+}
+
+.shit{
+  width: 40px;
+  height: 40px;
+
+  /* border-style: solid;
+  border-width: 5px; */
+
+}
+
+.theatreBox button{
+  margin-top: -91px;
+  margin-right: 900px;
+  margin-left: -10px;
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+
+.container{
+  margin-top: 70px;
+  height: 1300px;
+  /* border-style: solid;
+  border-width: 1px; */
+  width: 910px;
+  margin: 0 auto;
 }
