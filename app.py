@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import sys
+import random
 # import populartimes
 import datetime
 from theater import theater
@@ -18,7 +19,7 @@ labels = [
     '6am', '7am', '8am', '9am',
     '10am', '11am', '12pm', '1pm',
     '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm',
-    '10pm', '11pm', '12am'
+    '10pm', '11pm', '12am', '1am', '2am', '3am', '4am', '5am'
 ]
 
 colors = [
@@ -142,10 +143,13 @@ def pop():
         day = datetime.datetime.now()
         select = (str(request.form.get('place')))
 
-    # popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
-    value = None
-    if value is None:
-        return ("No popular times")
+    res = [0, 0, 0, 0, 0, 0, 0, 0, 26, 35]
+    for j in range(9):
+        res.append(random.randint(38, 43))
+
+    res.append(33)
+    res.append(28)
+
     day = day.strftime("%A")
     if day == 'Monday':
         curr = 0
@@ -163,7 +167,7 @@ def pop():
         curr = 6
 
     bar_labels=labels
-    return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=popular_times)
+    return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=res)
 
 if __name__ == '__main__':
 	app.run(debug = True)
