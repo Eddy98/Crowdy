@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import sys
-import populartimes
+# import populartimes
 import datetime
 from theater import theater
 from flask_mongoengine import MongoEngine, Document
@@ -142,8 +142,8 @@ def pop():
         day = datetime.datetime.now()
         select = (str(request.form.get('place')))
 
-    popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
-    value = popular_times.get("populartimes")
+    # popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
+    value = None
     if value is None:
         return ("No popular times")
     day = day.strftime("%A")
