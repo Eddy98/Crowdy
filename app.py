@@ -15,20 +15,20 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 app = Flask(__name__)
 
 labels = [
-    '6am', '7am', '8am', '9am',
-    '10am', '11am', '12pm', '1pm',
-    '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm',
-    '10pm', '11pm', '12am'
+	'6am', '7am', '8am', '9am',
+	'10am', '11am', '12pm', '1pm',
+	'2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm',
+	'10pm', '11pm', '12am'
 ]
 
 colors = [
-    "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
-    "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
-    "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
+	"#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+	"#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
+	"#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
 
 app.config['MONGODB_SETTINGS'] = {
-    'db': 'crowdy',
-    'host': 'mongodb://schan2023:crowdyapp123@ds027748.mlab.com:27748/crowdy'
+	'db': 'crowdy',
+	'host': 'mongodb://schan2023:crowdyapp123@ds027748.mlab.com:27748/crowdy'
 }
 
 db = MongoEngine(app)
@@ -50,7 +50,7 @@ class User(UserMixin, db.Document):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.objects(pk=user_id).first()
+	return User.objects(pk=user_id).first()
 
 #FORMS
 class RegForm(FlaskForm):
@@ -65,38 +65,38 @@ class LogForm(FlaskForm):
 #Register user
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegForm()
-    if request.method == 'POST':
-        if form.validate():
-            existing_user = User.objects(email=form.email.data).first()
-            if existing_user is None:
-                hashpass = generate_password_hash(form.password.data, method='sha256')
-                user = User(form.email.data,hashpass,form.location.data).save()
-                login_user(user)
-                return redirect(url_for('dashboard'))
-    return render_template('register.html', form=form)
+	form = RegForm()
+	if request.method == 'POST':
+		if form.validate():
+			existing_user = User.objects(email=form.email.data).first()
+			if existing_user is None:
+				hashpass = generate_password_hash(form.password.data, method='sha256')
+				user = User(form.email.data,hashpass,form.location.data).save()
+				login_user(user)
+				return redirect(url_for('dashboard'))
+	return render_template('register.html', form=form)
 
 #User login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated == True:
-        return redirect(url_for('dashboard'))
-    form = LogForm()
-    if request.method == 'POST':
-        if form.validate():
-            check_user = User.objects(email=form.email.data).first()
-            if check_user:
-                if check_password_hash(check_user['password'], form.password.data):
-                    login_user(check_user)
-                    return redirect(url_for('dashboard'))
-    return render_template('login.html', form=form)
+	if current_user.is_authenticated == True:
+		return redirect(url_for('dashboard'))
+	form = LogForm()
+	if request.method == 'POST':
+		if form.validate():
+			check_user = User.objects(email=form.email.data).first()
+			if check_user:
+				if check_password_hash(check_user['password'], form.password.data):
+					login_user(check_user)
+					return redirect(url_for('dashboard'))
+	return render_template('login.html', form=form)
 
 #User logout
 @app.route('/logout', methods = ['GET'])
 @login_required
 def logout():
-    logout_user()
-    return redirect(url_for('login'))
+	logout_user()
+	return redirect(url_for('login'))
 
 #Retrieves all theaters by location and radius
 @app.route('/dashboard', methods = ['POST', 'GET'])
@@ -128,42 +128,41 @@ def dashboard():
 	for item in parseData["results"]:
 		tempT = theater()
 		tempT.name = item["name"]
-		tempT.address = item["vicinity"]
 		tempT.place_id = item["place_id"]
-		# tempT.popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", tempT.place_id)
-		#tempT.rating = item["rating"]
+		tempT.lat = lat
+		tempT.lng = lng
 		list.append(tempT)
 
 	return render_template('display_theaters.html', list=list)
 
 @app.route('/pop', methods=['GET', 'POST'])
 def pop():
-    if request.method == 'POST':
-        day = datetime.datetime.now()
-        select = (str(request.form.get('place')))
+	if request.method == 'POST':
+		day = datetime.datetime.now()
+		select = (str(request.form.get('place')))
 
-    popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
-    value = popular_times.get("populartimes")
-    if value is None:
-        return ("No popular times")
-    day = day.strftime("%A")
-    if day == 'Monday':
-        curr = 0
-    if day == 'Tuesday':
-        curr = 1
-    if day == 'Wednesday':
-        curr = 2
-    if day == 'Thursday':
-        curr = 3
-    if day == 'Friday':
-        curr = 4
-    if day == 'Saturday':
-        curr = 5
-    if day == 'Sunday':
-        curr = 6
+	popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
+	value = popular_times.get("populartimes")
+	if value is None:
+		return ("No popular times")
+	day = day.strftime("%A")
+	if day == 'Monday':
+		curr = 0
+	if day == 'Tuesday':
+		curr = 1
+	if day == 'Wednesday':
+		curr = 2
+	if day == 'Thursday':
+		curr = 3
+	if day == 'Friday':
+		curr = 4
+	if day == 'Saturday':
+		curr = 5
+	if day == 'Sunday':
+		curr = 6
 
-    bar_labels=labels
-    return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=popular_times)
+	bar_labels=labels
+	return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=popular_times)
 
 if __name__ == '__main__':
 	app.run(debug = True)
