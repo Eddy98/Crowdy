@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import sys
-import populartimes
+# import populartimes
 import datetime
 from theater import theater
 from flask_mongoengine import MongoEngine, Document
@@ -137,32 +137,32 @@ def dashboard():
 
 @app.route('/pop', methods=['GET', 'POST'])
 def pop():
-	if request.method == 'POST':
-		day = datetime.datetime.now()
-		select = (str(request.form.get('place')))
+    if request.method == 'POST':
+        day = datetime.datetime.now()
+        select = (str(request.form.get('place')))
 
-	popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
-	value = popular_times.get("populartimes")
-	if value is None:
-		return ("No popular times")
-	day = day.strftime("%A")
-	if day == 'Monday':
-		curr = 0
-	if day == 'Tuesday':
-		curr = 1
-	if day == 'Wednesday':
-		curr = 2
-	if day == 'Thursday':
-		curr = 3
-	if day == 'Friday':
-		curr = 4
-	if day == 'Saturday':
-		curr = 5
-	if day == 'Sunday':
-		curr = 6
+    # popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", select)
+    value = None
+    if value is None:
+        return ("No popular times")
+    day = day.strftime("%A")
+    if day == 'Monday':
+        curr = 0
+    if day == 'Tuesday':
+        curr = 1
+    if day == 'Wednesday':
+        curr = 2
+    if day == 'Thursday':
+        curr = 3
+    if day == 'Friday':
+        curr = 4
+    if day == 'Saturday':
+        curr = 5
+    if day == 'Sunday':
+        curr = 6
 
-	bar_labels=labels
-	return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=popular_times)
+    bar_labels=labels
+    return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=popular_times)
 
 if __name__ == '__main__':
 	app.run(debug = True)
