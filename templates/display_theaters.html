@@ -15,6 +15,10 @@
     <p id="title">Crowdy</p>
     <p id="subTitle">Here. Are. Your. Theaters.</p>
 
+    <p>Radius</p>
+    <form action="{{ url_for('dashboard') }}" method="POST">
+      <input id="" type="text" name="inputLocation" value="">
+    </input>
 
     <body>
       <div class="container">
@@ -25,7 +29,7 @@
           </div> -->
           <p><b></b>{{ element.name }} </p>
           <p id="address"><b>Address: </b>{{ element.address }} </p>
-          
+
           <div class="shit">
             <!-- <img  src="https://imgur.com/a/5jsRE53" alt=""> -->
             <form action="{{ url_for('pop') }}" method="POST">
