@@ -337,3 +337,8 @@ input[type="submit"]:hover {
   font-family: gotham;
   color: white;
 }
+
+#map {
+        height: 500px;
+        width: 100%;
+      }

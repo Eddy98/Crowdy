@@ -17,17 +17,20 @@
 
 
     <body class="bodyDis">
-      <div class="map">
+      <div id = "map" class="map">
 
       </div>
       <div class="container">
-      <!-- {% for element in list %}
+      {% for element in list %}
 
         <div class="theatreBox">
+          <!-- <div class="graphBox">
+          </div> -->
           <p><b></b>{{ element.name }} </p>
           <p id="address"><b>Address: </b>{{ element.address }} </p>
 
           <div class="shit">
+            <!-- <img  src="https://imgur.com/a/5jsRE53" alt=""> -->
             <form action="{{ url_for('pop') }}" method="POST">
               <input id="disappear" type="text" name="place" value="{{ element.place_id}}">
             </input>
@@ -35,10 +38,53 @@
             </form>
             </div>
         </div>
-        <div id="chartID">
-        </div>
+        <div id="chartID"></div>
 
-       {% endfor %} -->
+
+       <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
+       {% endfor %}
+
+
+       <script>
+        debugger;
+        var locations = [];
+        {% for element in list %}
+
+          locations.push([ {{element.lat}}, {{element.lng}}, "{{ element.name}}" ]);
+          // console.log({{element.name}});
+
+        {% endfor %}
+        function initMap(){
+          var location = {lat:{{userLocationDict['latitude']}}, lng:{{userLocationDict['longitude']}}};
+
+          var map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 12,
+            center: location
+          });
+
+
+          var infowindow = new google.maps.InfoWindow();
+
+          var marker, i;
+
+          for (i = 0; i < locations.length; i++) {
+
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i][0], locations[i][1]),
+              map: map
+            });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][2]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
+
+        }
+      </script>
+       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI&callback=initMap"></script>
      </div>
 
      <div class="bottom">
@@ -64,5 +110,9 @@
            <img class="bit" src="https://i.imgur.com/ZpIiPlv.png" alt="">
            <p>Eric Roque</p>
            </div>
+           <!-- <a href='logout'>Logout</a> -->
+        </body>
+        <!-- <img id="leftCornD" src="https://imgur.com/nmzMpNZ.png" alt=""> -->
+        <!-- <img id="rightCornD" src="https://imgur.com/ls2WbKd.png" alt=""> -->
 
 </html>

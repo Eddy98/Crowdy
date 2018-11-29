@@ -1,4 +1,6 @@
 class theater():
+	lat = 0
+	lng = 0
 	name = ""
 	address = ""
 	rating = ""

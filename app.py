@@ -23,13 +23,13 @@ labels = [
 ]
 
 colors = [
-    "#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
-    "#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
-    "#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
+	"#F7464A", "#46BFBD", "#FDB45C", "#FEDCBA",
+	"#ABCDEF", "#DDDDDD", "#ABCABC", "#4169E1",
+	"#C71585", "#FF4500", "#FEDCBA", "#46BFBD"]
 
 app.config['MONGODB_SETTINGS'] = {
-    'db': 'crowdy',
-    'host': 'mongodb://schan2023:crowdyapp123@ds027748.mlab.com:27748/crowdy'
+	'db': 'crowdy',
+	'host': 'mongodb://schan2023:crowdyapp123@ds027748.mlab.com:27748/crowdy'
 }
 
 db = MongoEngine(app)
@@ -51,7 +51,7 @@ class User(UserMixin, db.Document):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.objects(pk=user_id).first()
+	return User.objects(pk=user_id).first()
 
 #FORMS
 class RegForm(FlaskForm):
@@ -66,76 +66,80 @@ class LogForm(FlaskForm):
 #Register user
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegForm()
-    if request.method == 'POST':
-        if form.validate():
-            existing_user = User.objects(email=form.email.data).first()
-            if existing_user is None:
-                hashpass = generate_password_hash(form.password.data, method='sha256')
-                user = User(form.email.data,hashpass,form.location.data).save()
-                login_user(user)
-                return redirect(url_for('dashboard'))
-    return render_template('register.html', form=form)
+	form = RegForm()
+	if request.method == 'POST':
+		if form.validate():
+			existing_user = User.objects(email=form.email.data).first()
+			if existing_user is None:
+				hashpass = generate_password_hash(form.password.data, method='sha256')
+				user = User(form.email.data,hashpass,form.location.data).save()
+				login_user(user)
+				return redirect(url_for('dashboard'))
+	return render_template('register.html', form=form)
 
 #User login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated == True:
-        return redirect(url_for('dashboard'))
-    form = LogForm()
-    if request.method == 'POST':
-        if form.validate():
-            check_user = User.objects(email=form.email.data).first()
-            if check_user:
-                if check_password_hash(check_user['password'], form.password.data):
-                    login_user(check_user)
-                    return redirect(url_for('dashboard'))
-    return render_template('login.html', form=form)
+	if current_user.is_authenticated == True:
+		return redirect(url_for('dashboard'))
+	form = LogForm()
+	if request.method == 'POST':
+		if form.validate():
+			check_user = User.objects(email=form.email.data).first()
+			if check_user:
+				if check_password_hash(check_user['password'], form.password.data):
+					login_user(check_user)
+					return redirect(url_for('dashboard'))
+	return render_template('login.html', form=form)
 
 #User logout
 @app.route('/logout', methods = ['GET'])
 @login_required
 def logout():
-    logout_user()
-    return redirect(url_for('login'))
+	logout_user()
+	return redirect(url_for('login'))
 
 #Retrieves all theaters by location and radius
 @app.route('/dashboard', methods = ['POST', 'GET'])
 @login_required
 def dashboard():
-	#Converts location string to longitude and latitude radiusString
-	geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
-	paramsGeocode = dict(
-		address=current_user.location,
-		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
-	)
-	resp = requests.get(url=geocodeUrl, params=paramsGeocode).content
-	respParse = json.loads(resp)
-	lng = str(respParse["results"][0]["geometry"]["location"]["lng"])
-	lat = str(respParse["results"][0]["geometry"]["location"]["lat"])
+    #Converts location string to longitude and latitude radiusString
+    geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
+    paramsGeocode = dict(
+    	address=current_user.location,
+    	key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
+    )
+    resp = requests.get(url=geocodeUrl, params=paramsGeocode).content
+    respParse = json.loads(resp)
+    lng = str(respParse["results"][0]["geometry"]["location"]["lng"])
+    lat = str(respParse["results"][0]["geometry"]["location"]["lat"])
 
-	#Finds movie theaters based on longitude and latitude and radius
-	url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-	params = dict(
-		location=lat + ',' + lng,
-		radius=40000,
-		type='movie_theater',
-		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
-	)
-	data = requests.get(url=url, params=params).content
-	parseData = json.loads(data)
-	list = []
+    userLocationDict = dict(
+        latitude=lat,
+        longitude=lng
+    )
+    #Finds movie theaters based on longitude and latitude and radius
+    url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+    params = dict(
+    	location=lat + ',' + lng,
+    	radius=40000,
+    	type='movie_theater',
+    	key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
+    )
+    data = requests.get(url=url, params=params).content
+    parseData = json.loads(data)
+    list = []
 
-	for item in parseData["results"]:
-		tempT = theater()
-		tempT.name = item["name"]
-		tempT.address = item["vicinity"]
-		tempT.place_id = item["place_id"]
-		# tempT.popular_times = populartimes.get_id("AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI", tempT.place_id)
-		#tempT.rating = item["rating"]
-		list.append(tempT)
+    for item in parseData["results"]:
+        tempT = theater()
+        tempT.name = item["name"]
+        tempT.address = item["vicinity"]
+        tempT.place_id = item["place_id"]
+        tempT.lat = item["geometry"]["location"]["lat"]
+        tempT.lng = item["geometry"]["location"]["lng"]
+        list.append(tempT)
 
-	return render_template('display_theaters.html', list=list)
+    return render_template('display_theaters.html', list=list, userLocationDict=userLocationDict)
 
 @app.route('/pop', methods=['GET', 'POST'])
 def pop():
@@ -170,4 +174,4 @@ def pop():
     return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=res)
 
 if __name__ == '__main__':
-	app.run(debug = True)
+    app.run(debug = True)
