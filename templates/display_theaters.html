@@ -25,9 +25,9 @@
 
     <body>
       <div class="container">
-        <div id="map"></div> 
+        <div id="map"></div>
       </div>
-      
+
       <div class="container">
       {% for element in list %}
 
@@ -35,8 +35,8 @@
           <!-- <div class="graphBox">
           </div> -->
           <p><b></b>{{ element.name }} </p>
-          <p id="address"><b>Address: </b>{{ element.lat }} </p>
-          
+          <p id="address"><b>Address: </b>{{ element.address }} </p>
+
           <div class="shit">
             <!-- <img  src="https://imgur.com/a/5jsRE53" alt=""> -->
             <form action="{{ url_for('pop') }}" method="POST">
@@ -47,23 +47,23 @@
             </div>
         </div>
         <div id="chartID"></div>
-        
+
 
        <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
        {% endfor %}
 
 
-       <script> 
+       <script>
         debugger;
         var locations = [];
         {% for element in list %}
-          
+
           locations.push([ {{element.lat}}, {{element.lng}}, "{{ element.name}}" ]);
           // console.log({{element.name}});
 
         {% endfor %}
         function initMap(){
-          var location = {lat:29.648032999999995, lng:-82.3442256};
+          var location = {lat:{{userLocationDict['latitude']}}, lng:{{userLocationDict['longitude']}}};
 
           var map = new google.maps.Map(document.getElementById("map"), {
             zoom: 12,

@@ -103,38 +103,43 @@ def logout():
 @app.route('/dashboard', methods = ['POST', 'GET'])
 @login_required
 def dashboard():
-	#Converts location string to longitude and latitude radiusString
-	geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
-	paramsGeocode = dict(
-		address=current_user.location,
-		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
-	)
-	resp = requests.get(url=geocodeUrl, params=paramsGeocode).content
-	respParse = json.loads(resp)
-	lng = str(respParse["results"][0]["geometry"]["location"]["lng"])
-	lat = str(respParse["results"][0]["geometry"]["location"]["lat"])
+    #Converts location string to longitude and latitude radiusString
+    geocodeUrl = "https://maps.googleapis.com/maps/api/geocode/json"
+    paramsGeocode = dict(
+    	address=current_user.location,
+    	key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
+    )
+    resp = requests.get(url=geocodeUrl, params=paramsGeocode).content
+    respParse = json.loads(resp)
+    lng = str(respParse["results"][0]["geometry"]["location"]["lng"])
+    lat = str(respParse["results"][0]["geometry"]["location"]["lat"])
 
-	#Finds movie theaters based on longitude and latitude and radius
-	url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-	params = dict(
-		location=lat + ',' + lng,
-		radius=40000,
-		type='movie_theater',
-		key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
-	)
-	data = requests.get(url=url, params=params).content
-	parseData = json.loads(data)
-	list = []
+    userLocationDict = dict(
+        latitude=lat,
+        longitude=lng
+    )
+    #Finds movie theaters based on longitude and latitude and radius
+    url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+    params = dict(
+    	location=lat + ',' + lng,
+    	radius=40000,
+    	type='movie_theater',
+    	key='AIzaSyBBABVNXk90RVdvQqgDanDifw-bgMGeONI'
+    )
+    data = requests.get(url=url, params=params).content
+    parseData = json.loads(data)
+    list = []
 
-	for item in parseData["results"]:
-		tempT = theater()
-		tempT.name = item["name"]
-		tempT.place_id = item["place_id"]
-		tempT.lat = item["geometry"]["location"]["lat"]
-		tempT.lng = item["geometry"]["location"]["lng"]
-		list.append(tempT)
+    for item in parseData["results"]:
+        tempT = theater()
+        tempT.name = item["name"]
+        tempT.address = item["vicinity"]
+        tempT.place_id = item["place_id"]
+        tempT.lat = item["geometry"]["location"]["lat"]
+        tempT.lng = item["geometry"]["location"]["lng"]
+        list.append(tempT)
 
-	return render_template('display_theaters.html', list=list)
+    return render_template('display_theaters.html', list=list, userLocationDict=userLocationDict)
 
 @app.route('/pop', methods=['GET', 'POST'])
 def pop():
@@ -169,4 +174,4 @@ def pop():
     return render_template('popular_times.html', title='Popular Times', max=50, labels=bar_labels, times=res)
 
 if __name__ == '__main__':
-	app.run(debug = True)
+    app.run(debug = True)
