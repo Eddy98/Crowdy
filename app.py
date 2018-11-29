@@ -129,8 +129,8 @@ def dashboard():
 		tempT = theater()
 		tempT.name = item["name"]
 		tempT.place_id = item["place_id"]
-		tempT.lat = lat
-		tempT.lng = lng
+		tempT.lat = item["geometry"]["location"]["lat"]
+		tempT.lng = item["geometry"]["location"]["lng"]
 		list.append(tempT)
 
 	return render_template('display_theaters.html', list=list)
