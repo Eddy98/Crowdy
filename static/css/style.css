@@ -9,17 +9,17 @@
   font-family: aller;
 }
 
-#title{
-  margin-top: 7%;
+.title{
+  margin-top: 4%;
   font-size: 154px;
   font-family: gotham;
   text-align: center;
   color: white;
+  margin-bottom: -10px;
 }
 
-#subTitle{
-  margin-top: -125px;
-  font-size: 45px;
+.subTitle{
+  font-size: 30px;
   font-family: gotham;
   text-align: center;
   color: #eed697;
@@ -168,6 +168,9 @@ input[type="submit"]:hover {
   position: absolute;
 }
 
+.formWrapper{
+  margin-top: 100px;
+}
 /* Register Page */
 
 #registerForm{
@@ -186,9 +189,10 @@ input[type="submit"]:hover {
 
 /* Display Theatres Page */
 
-.backgroundTheatrePage{
+.crowdyWrapper{
     background-color: #31393a;
     width: 100%;
+    height: 40vh;
     overflow: hidden;
     background-position: center center;
     background-repeat: no-repeat;
@@ -271,11 +275,48 @@ input[type="submit"]:hover {
   float: left;
 }
 
+.map{
+  background-color: #507176;
+  width: 60%;
+  height: 100vh;
+  float: left;
+}
+
 .container{
-  margin-top: 70px;
-  height: 1300px;
-  /* border-style: solid;
-  border-width: 1px; */
-  width: 910px;
-  margin: 0 auto;
+  width: 40%;
+  height: 100vh;
+  /* background-color: blue; */
+  float: right;
+
+}
+
+
+.bottom{
+  width: 100%;
+  height: 60vh;
+  background-color: #172e31;
+  float: left;
+}
+
+#title2{
+  margin-top: 5%;
+  font-size: 100px;
+  font-family: gotham;
+  text-align: center;
+  color: white;
+  margin-bottom: -10px;
+}
+
+.mojiWrapper{
+  height: 400px;
+  width: 100%;
+  background-color: green;
+  position: relative;
+}
+
+.mojiBox{
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  position: absolute;
 }

@@ -11,23 +11,23 @@
   </head>
   <div class="backgroundTheatrePage">
     <div class="crowdyWrapper">
+      <p class="title">Crowdy</p>
+      <p class="subTitle">Here. Are. Your. Theaters.</p>
     </div>
-    <p id="title">Crowdy</p>
-    <p id="subTitle">Here. Are. Your. Theaters.</p>
 
 
-    <body>
+    <body class="bodyDis">
+      <div class="map">
+
+      </div>
       <div class="container">
-      {% for element in list %}
+      <!-- {% for element in list %}
 
         <div class="theatreBox">
-          <!-- <div class="graphBox">
-          </div> -->
           <p><b></b>{{ element.name }} </p>
           <p id="address"><b>Address: </b>{{ element.address }} </p>
-          
+
           <div class="shit">
-            <!-- <img  src="https://imgur.com/a/5jsRE53" alt=""> -->
             <form action="{{ url_for('pop') }}" method="POST">
               <input id="disappear" type="text" name="place" value="{{ element.place_id}}">
             </input>
@@ -38,12 +38,35 @@
         <div id="chartID">
         </div>
 
-       <!--<p><b>Rating: </b>{{ element.rating }} </p><br>-->
-       {% endfor %}
+       {% endfor %} -->
      </div>
-       <a href='logout'>Logout</a>
+
+     <div class="bottom">
+       <p id="title2">Meet The Team</p>
+       <div class="mojiWrapper">
+         <div class="mojiBox">
+
+         </div>
+         <div class="mojiBox">
+
+         </div>
+         <div class="mojiBox">
+
+         </div>
+         <div class="mojiBox">
+
+         </div>
+         <div class="mojiBox">
+
+         </div>
+       </div>
+
+
+     </div>
+
     </body>
-    <img id="leftCornD" src="https://imgur.com/nmzMpNZ.png" alt="">
-    <img id="rightCornD" src="https://imgur.com/ls2WbKd.png" alt="">
+    <!-- <a href='logout'>Logout</a> -->
+    <!-- <img id="leftCornD" src="https://imgur.com/nmzMpNZ.png" alt="">
+    <img id="rightCornD" src="https://imgur.com/ls2WbKd.png" alt=""> -->
   </div>
 </html>
